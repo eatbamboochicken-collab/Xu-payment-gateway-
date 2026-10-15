@@ -1,0 +1,900 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFC400">
+  <meta name="description" content="Bamboo Chicken personal EcoCash payment experience.">
+  <title>Pay Simply | Bamboo Chicken</title>
+
+  <style>
+    :root {
+      /* Bamboo Chicken — original brand palette */
+      --bamboo-yellow: #ffc400;
+      --bamboo-gold: #ffad00;
+      --bamboo-orange: #f47b00;
+      --bamboo-deep-orange: #e85f00;
+      --bamboo-black: #111111;
+      --bamboo-cream: #fff9e8;
+
+      /* EcoCash */
+      --ecocash-blue: #0066b3;
+      --ecocash-blue-dark: #00518f;
+      --ecocash-blue-soft: #eaf4fb;
+
+      /* General */
+      --white: #ffffff;
+      --text: #151515;
+      --muted: #686868;
+      --border: #eadfca;
+      --danger: #b42318;
+      --danger-bg: #fff1f0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(
+          circle at 15% 5%,
+          rgba(255, 196, 0, 0.20),
+          transparent 28%
+        ),
+        linear-gradient(
+          180deg,
+          #fff8df 0%,
+          #fffaf0 42%,
+          #fffdf8 100%
+        );
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input,
+    a {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100%, 520px);
+      margin: 0 auto;
+      padding: 0 16px 42px;
+    }
+
+    /* BAMBOO CHICKEN BRAND HEADER */
+
+    .hero {
+      text-align: center;
+      padding: 30px 10px 22px;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: var(--bamboo-black);
+      color: var(--bamboo-yellow);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 8px;
+      border-radius: 50%;
+      background: var(--bamboo-yellow);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(30px, 8vw, 42px);
+      line-height: 0.98;
+      letter-spacing: -1.7px;
+      font-weight: 950;
+    }
+
+    .hero h1 span {
+      color: var(--bamboo-orange);
+    }
+
+    .hero p {
+      max-width: 390px;
+      margin: 12px auto 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* PAYMENT CARD */
+
+    .payment-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow:
+        0 18px 50px rgba(41, 29, 4, 0.10),
+        0 3px 10px rgba(41, 29, 4, 0.05);
+    }
+
+    .payment-card::before {
+      content: "";
+      display: block;
+      height: 7px;
+      background: linear-gradient(
+        90deg,
+        var(--bamboo-yellow),
+        var(--bamboo-orange)
+      );
+    }
+
+    .card-content {
+      padding: 25px 21px 24px;
+    }
+
+    /* ECOCASH HEADER */
+
+    .payment-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .ecocash-icon {
+      width: 56px;
+      height: 56px;
+      flex: 0 0 56px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: var(--ecocash-blue);
+      color: var(--white);
+      box-shadow: 0 8px 18px rgba(0, 102, 179, 0.22);
+    }
+
+    .ecocash-icon svg {
+      width: 31px;
+      height: 31px;
+    }
+
+    .payment-heading {
+      min-width: 0;
+    }
+
+    .payment-heading h2 {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.1;
+      letter-spacing: -0.6px;
+    }
+
+    .payment-heading p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* RECIPIENT */
+
+    .merchant-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 23px;
+      padding: 15px;
+      border-radius: 17px;
+      background: #faf7ef;
+      border: 1px solid #eee5d5;
+    }
+
+    .merchant-info {
+      min-width: 0;
+    }
+
+    .merchant-label {
+      margin-bottom: 4px;
+      color: #8a806d;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .merchant-name {
+      font-size: 17px;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+    }
+
+    .recipient-description {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .personal-badge {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: var(--ecocash-blue-soft);
+      color: var(--ecocash-blue-dark);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .personal-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ecocash-blue);
+    }
+
+    /* AMOUNT */
+
+    .amount-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 9px;
+    }
+
+    .amount-label {
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .currency-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .amount-wrap {
+      position: relative;
+    }
+
+    .currency-symbol {
+      position: absolute;
+      z-index: 1;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+      font-size: 23px;
+      font-weight: 900;
+      pointer-events: none;
+    }
+
+    .amount-input {
+      width: 100%;
+      height: 68px;
+      border: 2px solid #ded6c6;
+      border-radius: 18px;
+      outline: none;
+      background: var(--white);
+      color: var(--text);
+      padding: 8px 17px 8px 48px;
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .amount-input::placeholder {
+      color: #b7b1a7;
+    }
+
+    .amount-input:focus {
+      border-color: var(--bamboo-orange);
+      box-shadow: 0 0 0 4px rgba(244, 123, 0, 0.13);
+    }
+
+    .amount-input::-webkit-outer-spin-button,
+    .amount-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .amount-input[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    /* QUICK AMOUNTS */
+
+    .quick-amounts {
+      display: flex;
+      gap: 8px;
+      margin-top: 11px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .quick-amounts::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-btn {
+      flex: 0 0 auto;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid #ded6c6;
+      border-radius: 999px;
+      background: var(--white);
+      color: #333;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .quick-btn:hover {
+      border-color: var(--bamboo-orange);
+      background: #fffaf0;
+    }
+
+    .quick-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* DECIMAL MESSAGE */
+
+    .decimal-message {
+      display: none;
+      margin-top: 13px;
+      padding: 13px 14px;
+      border-radius: 15px;
+      background: #fff8df;
+      border: 1px solid #f1d98b;
+      color: #654d00;
+    }
+
+    .decimal-message.visible {
+      display: block;
+    }
+
+    .decimal-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 4px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .decimal-copy {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* ERROR */
+
+    .error-message {
+      display: none;
+      margin-top: 13px;
+      padding: 13px 14px;
+      border-radius: 14px;
+      background: var(--danger-bg);
+      border: 1px solid #f5c2be;
+      color: var(--danger);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .error-message.visible {
+      display: block;
+    }
+
+    /* ECOCASH PAYMENT BUTTON */
+
+    .pay-button {
+      width: 100%;
+      min-height: 62px;
+      margin-top: 18px;
+      border: 0;
+      border-radius: 18px;
+      background: linear-gradient(
+        135deg,
+        var(--ecocash-blue),
+        var(--ecocash-blue-dark)
+      );
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 22px rgba(0, 102, 179, 0.23);
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .pay-button:hover {
+      box-shadow: 0 13px 27px rgba(0, 102, 179, 0.29);
+    }
+
+    .pay-button:active {
+      transform: scale(0.985);
+      box-shadow: 0 5px 12px rgba(0, 102, 179, 0.18);
+    }
+
+    .pay-button svg {
+      width: 21px;
+      height: 21px;
+      flex: 0 0 auto;
+    }
+
+    /* HOW IT WORKS */
+
+    .steps {
+      margin-top: 23px;
+      padding-top: 21px;
+      border-top: 1px solid #eee7db;
+    }
+
+    .steps-title {
+      margin: 0 0 15px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      margin-bottom: 12px;
+    }
+
+    .step:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-number {
+      width: 27px;
+      height: 27px;
+      flex: 0 0 27px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--bamboo-yellow);
+      color: var(--bamboo-black);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .step-copy {
+      padding-top: 3px;
+      color: #555;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .step-copy strong {
+      color: var(--text);
+    }
+
+    /* SECURITY */
+
+    .security-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 13px 14px;
+      border-radius: 15px;
+      background: var(--ecocash-blue-soft);
+      color: var(--ecocash-blue-dark);
+    }
+
+    .security-note svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      margin-top: 1px;
+    }
+
+    .security-note p {
+      margin: 0;
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    /* BRAND FOOTER */
+
+    .footer {
+      text-align: center;
+      padding: 22px 10px 0;
+    }
+
+    .footer-brand {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+    }
+
+    .footer-brand span {
+      color: var(--bamboo-orange);
+    }
+
+    .footer p {
+      margin: 5px 0 0;
+      color: #898989;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 380px) {
+      .page {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .card-content {
+        padding: 22px 17px;
+      }
+
+      .personal-badge {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="hero">
+      <div class="brand-mark">
+        <span class="brand-dot"></span>
+        Bamboo Chicken
+      </div>
+
+      <h1>Pay <span>Simply.</span></h1>
+
+      <p>
+        Enter your payment amount below and continue
+        securely with EcoCash.
+      </p>
+    </header>
+
+    <section class="payment-card">
+      <div class="card-content">
+
+        <div class="payment-header">
+          <div class="ecocash-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="M3 10h18"></path>
+              <path d="M7 15h3"></path>
+            </svg>
+          </div>
+
+          <div class="payment-heading">
+            <h2>EcoCash Payment</h2>
+            <p>Personal payment to Xu Yong Jie</p>
+          </div>
+        </div>
+
+        <div class="merchant-box">
+          <div class="merchant-info">
+            <div class="merchant-label">Paying</div>
+            <div class="merchant-name">Xu Yong Jie</div>
+            <div class="recipient-description">
+              Personal EcoCash recipient
+            </div>
+          </div>
+
+          <div class="personal-badge">
+            <span class="personal-dot"></span>
+            Personal
+          </div>
+        </div>
+
+        <div class="amount-label-row">
+          <label class="amount-label" for="amount">
+            Payment amount
+          </label>
+          <span class="currency-label">USD</span>
+        </div>
+
+        <div class="amount-wrap">
+          <span class="currency-symbol" aria-hidden="true">$</span>
+
+          <input
+            id="amount"
+            class="amount-input"
+            type="number"
+            inputmode="decimal"
+            min="0.01"
+            max="50000"
+            step="0.01"
+            placeholder="0.00"
+            autocomplete="off"
+            aria-describedby="amountHelp"
+          >
+        </div>
+
+        <div class="quick-amounts" aria-label="Quick payment amounts">
+          <button class="quick-btn" type="button" data-amount="3">$3</button>
+          <button class="quick-btn" type="button" data-amount="5">$5</button>
+          <button class="quick-btn" type="button" data-amount="10">$10</button>
+          <button class="quick-btn" type="button" data-amount="20">$20</button>
+        </div>
+
+        <div
+          id="amountHelp"
+          class="decimal-message"
+          aria-live="polite"
+          hidden
+        >
+          <div class="decimal-title">
+            <span aria-hidden="true">ℹ️</span>
+            Your amount includes cents
+          </div>
+
+          <p class="decimal-copy">
+            We'll open EcoCash without pre-filling the amount.
+            Enter the exact amount inside EcoCash.
+          </p>
+        </div>
+
+        <div
+          id="error"
+          class="error-message"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+        <a
+          id="payButton"
+          class="pay-button"
+          href="#"
+          aria-label="Continue to EcoCash payment"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="M3 10h18"></path>
+            <path d="M7 15h3"></path>
+          </svg>
+
+          Pay with EcoCash
+        </a>
+
+        <div class="steps">
+          <h3 class="steps-title">How it works</h3>
+
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-copy">
+              Enter the <strong>amount</strong> you want to pay.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-copy">
+              Tap <strong>Pay with EcoCash</strong>.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-copy">
+              Your phone opens the <strong>EcoCash payment flow</strong>.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-copy">
+              Check the recipient and amount, then follow the prompts
+              on your phone.
+            </div>
+          </div>
+        </div>
+
+        <div class="security-note">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4z"></path>
+            <path d="M9 12l2 2 4-4"></path>
+          </svg>
+
+          <p>
+            <strong>Your PIN stays private.</strong>
+            Bamboo Chicken will never ask for your EcoCash PIN.
+            Enter it only in the official EcoCash flow.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        Bamboo <span>Chicken</span>
+      </div>
+
+      <p>Crispy &amp; Juicy, Taste the Bamboo Magic!</p>
+    </footer>
+
+  </main>
+
+  <script>
+    /*
+     * BAMBOO CHICKEN PERSONAL ECOCASH CONFIGURATION
+     *
+     * Recipient shown to customers: Xu Yong Jie
+     * Recipient number is intentionally not displayed.
+     *
+     * Whole-dollar example:
+     * *153*1*1*0784933111*5#
+     *
+     * Decimal example:
+     * *153*1*1*0784933111#
+     *
+     * Decimal amounts are entered inside EcoCash.
+     */
+
+    const RECIPIENT_NUMBER = "0784933111";
+    const MAX_AMOUNT = 50000;
+
+    const amountInput = document.getElementById("amount");
+    const payButton = document.getElementById("payButton");
+    const errorBox = document.getElementById("error");
+    const decimalMessage = document.getElementById("amountHelp");
+
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.classList.add("visible");
+    }
+
+    function hideError() {
+      errorBox.textContent = "";
+      errorBox.classList.remove("visible");
+    }
+
+    function updateAmountMessage() {
+      hideError();
+
+      const raw = amountInput.value.trim();
+
+      if (!raw) {
+        decimalMessage.hidden = true;
+        decimalMessage.classList.remove("visible");
+        return;
+      }
+
+      const amount = Number(raw);
+
+      const hasCents =
+        Number.isFinite(amount) &&
+        amount > 0 &&
+        !Number.isInteger(amount);
+
+      decimalMessage.hidden = !hasCents;
+      decimalMessage.classList.toggle("visible", hasCents);
+    }
+
+    amountInput.addEventListener("input", updateAmountMessage);
+
+    document.querySelectorAll(".quick-btn").forEach(function (button) {
+      button.addEventListener("click", function () {
+        amountInput.value = button.dataset.amount;
+        updateAmountMessage();
+        amountInput.focus();
+      });
+    });
+
+    payButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      hideError();
+
+      const rawAmount = amountInput.value.trim();
+
+      if (!rawAmount) {
+        showError("Please enter the amount you want to pay.");
+        amountInput.focus();
+        return;
+      }
+
+      const amount = Number(rawAmount);
+
+      if (!Number.isFinite(amount) || amount <= 0) {
+        showError("Please enter a valid payment amount.");
+        amountInput.focus();
+        return;
+      }
+
+      if (amount > MAX_AMOUNT) {
+        showError("Please enter an amount no greater than $50,000.");
+        amountInput.focus();
+        return;
+      }
+
+      let ussd;
+
+      if (Number.isInteger(amount)) {
+        ussd =
+          "*153*1*1*" +
+          RECIPIENT_NUMBER +
+          "*" +
+          String(amount) +
+          "#";
+      } else {
+        ussd =
+          "*153*1*1*" +
+          RECIPIENT_NUMBER +
+          "#";
+      }
+
+      const telURI = "tel:" + ussd.replace(/#/g, "%23");
+
+      window.location.href = telURI;
+    });
+  </script>
+</body>
+</html>
